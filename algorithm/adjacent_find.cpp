@@ -46,17 +46,22 @@ template <typename T>
 T* s1_adjacent_find(T a[], T *first, T *second, bool(*cmp)(T,T)){
     T *i;
     for(i = first;i < second;i++){
-        if(cmp(i,i+1)){
+        if(cmp(*i,*(i+1))){
             return i;
         }
     }
     return second+1;
 }
 
+bool cmp(int a,int b){
+    if(a + b == 2) return true;
+    else return false;
+}
+
 int main(){
     int a[3] = {0,1,1};
     int *first = &a[0],*second = &a[2];
-    int* result = s1_adjacent_find(a,first,second);
+    int* result = s1_adjacent_find(a,first,second,cmp);
     cout<<*result;
 
     return 0;
